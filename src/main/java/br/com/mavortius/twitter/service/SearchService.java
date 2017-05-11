@@ -1,5 +1,6 @@
 package br.com.mavortius.twitter.service;
 
+import br.com.mavortius.twitter.web.LightTweet;
 import org.springframework.social.twitter.api.SearchParameters;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
@@ -16,14 +17,15 @@ public class SearchService {
         this.twitter = twitter;
     }
 
-    public List<Tweet> search(String searchType, List<String> keywords) {
+    public List<LightTweet> search(String searchType, List<String> keywords) {
         List<SearchParameters> searches = keywords.stream()
                                             .map(taste -> createSearchParameters(searchType, taste))
                                             .collect(Collectors.toList());
-        List<Tweet> results = searches.stream()
+        List<LightTweet> results = searches.stream()
                                 .map(params -> twitter.searchOperations()
                                 .search(params))
                                 .flatMap(searchResults -> searchResults.getTweets().stream())
+                                .map(LightTweet::ofTweet)
                                 .collect(Collectors.toList());
         return results;
     }
