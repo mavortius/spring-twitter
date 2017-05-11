@@ -1,9 +1,8 @@
 package br.com.mavortius.twitter.web.controller;
 
-import br.com.mavortius.twitter.web.ProfileForm;
+import br.com.mavortius.twitter.domain.ProfileForm;
 import br.com.mavortius.twitter.web.UserProfileSession;
 import br.com.mavortius.twitter.web.formatter.USLocalDateFormatter;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;

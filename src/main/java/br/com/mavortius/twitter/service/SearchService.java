@@ -1,8 +1,7 @@
 package br.com.mavortius.twitter.service;
 
-import br.com.mavortius.twitter.web.LightTweet;
+import br.com.mavortius.twitter.domain.LightTweet;
 import org.springframework.social.twitter.api.SearchParameters;
-import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Service;
 

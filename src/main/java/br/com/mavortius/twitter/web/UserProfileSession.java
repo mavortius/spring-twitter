@@ -1,5 +1,6 @@
 package br.com.mavortius.twitter.web;
 
+import br.com.mavortius.twitter.domain.ProfileForm;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.io.Resource;

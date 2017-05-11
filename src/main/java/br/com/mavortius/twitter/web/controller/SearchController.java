@@ -1,7 +1,7 @@
 package br.com.mavortius.twitter.web.controller;
 
 import br.com.mavortius.twitter.service.SearchService;
-import br.com.mavortius.twitter.web.LightTweet;
+import br.com.mavortius.twitter.domain.LightTweet;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.PathVariable;

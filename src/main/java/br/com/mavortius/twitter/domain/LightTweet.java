@@ -1,4 +1,4 @@
-package br.com.mavortius.twitter.web;
+package br.com.mavortius.twitter.domain;
 
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.TwitterProfile;
