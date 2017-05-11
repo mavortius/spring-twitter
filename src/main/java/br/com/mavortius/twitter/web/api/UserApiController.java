@@ -1,9 +1,13 @@
 package br.com.mavortius.twitter.web.api;
 
 import br.com.mavortius.twitter.domain.User;
+import br.com.mavortius.twitter.error.EntityNotFoundException;
 import br.com.mavortius.twitter.repository.UserRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
 import java.util.List;
 
 @RestController
@@ -21,18 +25,35 @@ public class UserApiController {
         return repository.findAll();
     }
 
+    @RequestMapping(value = "/user/{email}", method = RequestMethod.GET)
+    public User findOne(@PathVariable String email) throws EntityNotFoundException {
+        return repository.findOne(email);
+    }
+
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public User create(@RequestBody User user) {
-        return repository.save(user);
+    public ResponseEntity<User> create(@RequestBody User user) {
+        HttpStatus status = HttpStatus.OK;
+
+        if (!repository.exists(user.getEmail())) {
+            status = HttpStatus.CREATED;
+        }
+
+        User saved = repository.save(user);
+
+        return new ResponseEntity<>(saved, status);
     }
 
     @RequestMapping(value = "/user/{email}", method = RequestMethod.PUT)
-    public User update(@PathVariable String email, @RequestBody User user) {
-        return repository.save(email, user);
+    public ResponseEntity<User> update(@PathVariable String email, @RequestBody User user) throws EntityNotFoundException {
+        User saved = repository.save(email, user);
+
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/user/{email}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable String email) {
+    public ResponseEntity<User> delete(@PathVariable String email) throws EntityNotFoundException {
         repository.delete(email);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
